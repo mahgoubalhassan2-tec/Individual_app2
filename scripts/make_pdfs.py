@@ -9,22 +9,42 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
-ROOT = Path("/home/muhammad/Downloads/Uni/Individual_app")
+ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 EVIDENCE = ROOT / "evidence"
 
-pdfmetrics.registerFont(TTFont("Serif", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf"))
-pdfmetrics.registerFont(TTFont("SerifBold", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"))
-pdfmetrics.registerFont(TTFont("Sans", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
-pdfmetrics.registerFont(TTFont("SansBold", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"))
 
-INK = Color(28 / 255, 20 / 255, 16 / 255)
-PAPER = Color(244 / 255, 239 / 255, 230 / 255)
-TERR = Color(140 / 255, 52 / 255, 24 / 255)
-MUTED = Color(92 / 255, 83 / 255, 76 / 255)
-OLIVE = Color(36 / 255, 50 / 255, 38 / 255)
-LINE = Color(226 / 255, 216 / 255, 204 / 255)
-CARD = Color(1, 252 / 255, 247 / 255)
+def first_font(*paths: str) -> str:
+    for path in paths:
+        if Path(path).exists():
+            return path
+    raise FileNotFoundError("None of the expected fonts were found.")
+
+
+pdfmetrics.registerFont(TTFont("Serif", first_font(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+    r"C:\Windows\Fonts\georgia.ttf",
+)))
+pdfmetrics.registerFont(TTFont("SerifBold", first_font(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+    r"C:\Windows\Fonts\georgiab.ttf",
+)))
+pdfmetrics.registerFont(TTFont("Sans", first_font(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    r"C:\Windows\Fonts\segoeui.ttf",
+)))
+pdfmetrics.registerFont(TTFont("SansBold", first_font(
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    r"C:\Windows\Fonts\segoeuib.ttf",
+)))
+
+INK = Color(20 / 255, 12 / 255, 18 / 255)
+PAPER = Color(248 / 255, 243 / 255, 246 / 255)
+TERR = Color(196 / 255, 58 / 255, 42 / 255)
+MUTED = Color(92 / 255, 70 / 255, 84 / 255)
+OLIVE = Color(92 / 255, 46 / 255, 120 / 255)
+LINE = Color(232 / 255, 214 / 255, 224 / 255)
+CARD = Color(1, 1, 1)
 
 
 def header(c: canvas.Canvas, page: str, title: str) -> None:
@@ -33,7 +53,7 @@ def header(c: canvas.Canvas, page: str, title: str) -> None:
     c.rect(0, height - 36, width, 36, fill=1, stroke=0)
     c.setFillColor(white)
     c.setFont("SansBold", 9)
-    c.drawString(36, height - 23, "MOHHPortfolio  ·  MOB_A2_2527014")
+    c.drawString(36, height - 23, "MAAAPortfolio  ·  MOB_A2_2528013")
     c.drawRightString(width - 36, height - 23, page)
     c.setFillColor(INK)
     c.setFont("SerifBold", 16)
@@ -43,7 +63,7 @@ def header(c: canvas.Canvas, page: str, title: str) -> None:
 def footer(c: canvas.Canvas, number: int, total: int) -> None:
     c.setFillColor(MUTED)
     c.setFont("Sans", 8)
-    c.drawString(36, 28, "Mohammed Osama Hasan Hossein  ·  25/27014  ·  MOB-A2-7014")
+    c.drawString(36, 28, "Mahgoub Adil Ahmed Alhassn  ·  25/28013  ·  MOB-A2-8013")
     c.drawRightString(A4[0] - 36, 28, f"{number} / {total}")
 
 
@@ -85,7 +105,7 @@ def phone(c: canvas.Canvas, x: float, y: float, w: float, h: float, caption: str
 
 
 def build_uiux() -> None:
-    path = DOCS / "MOB_A2_2527014_UIUX.pdf"
+    path = DOCS / "MOB_A2_2528013_UIUX.pdf"
     c = canvas.Canvas(str(path), pagesize=A4)
     total = 6
     width, height = A4
@@ -94,16 +114,16 @@ def build_uiux() -> None:
     y = height - 92
     c.setFont("SerifBold", 13)
     c.setFillColor(INK)
-    c.drawString(36, y, "My name is Mohammed Osama Hasan Hossein.")
+    c.drawString(36, y, "My name is Mahgoub Adil Ahmed Alhassn.")
     y -= 28
     rows = [
-        ("App name", "MOHHPortfolio, from the initials M.O.H.H."),
-        ("Student", "Mohammed Osama Hasan Hossein"),
-        ("Registration", "25/27014"),
-        ("Verification code", "MOB-A2-7014"),
-        ("Package", "rw.ac.ines.ug2527014.mohhportfolio"),
-        ("Intended recruiter", "A recruiter for an internship or a first backend role"),
-        ("Portfolio focus", "Backend development: Python, Node.js, Linux, and Git"),
+        ("App name", "MAAAPortfolio, from the initials M.A.A.A."),
+        ("Student", "Mahgoub Adil Ahmed Alhassn"),
+        ("Registration", "25/28013"),
+        ("Verification code", "MOB-A2-8013"),
+        ("Package", "rw.ac.ines.ug2528013.maaaportfolio"),
+        ("Intended recruiter", "A recruiter for an internship in automation or cloud engineering"),
+        ("Portfolio focus", "Automation, Python, and cloud engineering"),
     ]
     for label, value in rows:
         c.setFont("SansBold", 10)
@@ -116,7 +136,7 @@ def build_uiux() -> None:
     y -= 8
     y = paragraph(
         c,
-        "The app replaces a paper CV for a short meeting. The recruiter installs one APK, opens it without Expo Go, and can read the introduction, two backend projects, and contact status while the phone is offline.",
+        "The app replaces a paper CV for a short meeting. The recruiter installs one APK, opens it without Expo Go, and can read the introduction and two automation and cloud projects while the phone is offline.",
         36,
         y,
         width - 72,
@@ -124,7 +144,7 @@ def build_uiux() -> None:
     y -= 8
     y = paragraph(
         c,
-        "Visual direction: the colors come from the live portfolio at mohammedosamaportfolio.vercel.app. The ground is void black #03070E, cards are deep navy, body text is off-white, secondary text is dust blue #9BCDDD, and the only accent is gold #A5743D. The layout stays in one column so a narrow Android phone and a larger system text size can scroll instead of clipping.",
+        "Visual direction: the ground is night plum #140C12, cards are deeper orchid, body text is mist #F8F3F6, secondary text is blush #D4B8C8, and the accent is coral #FF6B57. The layout stays in one column so a narrow Android phone and a larger system text size can scroll instead of clipping.",
         36,
         y,
         width - 72,
@@ -143,14 +163,14 @@ def build_uiux() -> None:
     )
     y -= 6
     flows = [
-        "Home: introduction, portrait, headline, biography, primary skill, code MOB-A2-7014, offline note.",
+        "Home: introduction, portrait, headline, biography, primary skill, code MOB-A2-8013, offline note.",
         "Skills: seven skill cards, then an education and training timeline.",
         "Projects: project list, then Project details with problem, contribution, and technology.",
         "Profile: capture or choose a portrait and a verification-card photo, edit four fields, save or reset.",
         "About: app name, student, registration, code, version, package, data-use statement, card preview.",
         "Saved state: Save writes AsyncStorage. Reset deletes that record and the copied images.",
         "Media: permission denial and cancellation keep the current image and show a message.",
-        "Connection: the INES website link is labeled Needs a connection. Everything else is local.",
+        "Connection: the portfolio has no external contact links. Every screen is local.",
     ]
     for item in flows:
         c.setFillColor(TERR)
@@ -169,15 +189,15 @@ def build_uiux() -> None:
         430,
         "Home",
         [
-            "My name is Mohammed",
-            "Osama Hasan Hossein.",
+            "My name is Mahgoub",
+            "Adil Ahmed Alhassn.",
             "[ portrait ]",
-            "MOHHPORTFOLIO",
+            "MAAAPORTFOLIO",
             "Headline",
             "Availability badge",
             "Short biography",
             "Primary skill",
-            "MOB-A2-7014",
+            "MOB-A2-8013",
             "Works offline",
         ],
     )
@@ -190,13 +210,13 @@ def build_uiux() -> None:
         "Skills",
         [
             "SKILLS",
+            "Python",
+            "Automation",
+            "Cloud engineering",
             "Linux",
             "Git",
-            "Python",
-            "JavaScript",
-            "Node.js",
-            "REST APIs",
-            "SQL",
+            "Scripting",
+            "Infrastructure",
             "Education timeline",
             "Empty state if none",
         ],
@@ -210,8 +230,8 @@ def build_uiux() -> None:
         "Projects",
         [
             "PROJECTS",
-            "Node.js request API",
-            "Python tools on Linux",
+            "Python automation scripts",
+            "Cloud environment setup",
         ],
     )
     c.setFont("Sans", 9)
@@ -237,7 +257,7 @@ def build_uiux() -> None:
         "Project details",
         [
             "Back to Projects",
-            "[ 01 Node.js API ]",
+            "[ 01 Python automation ]",
             "Title",
             "PROBLEM",
             "MY CONTRIBUTION",
@@ -300,11 +320,11 @@ def build_uiux() -> None:
     header(c, "Page 5", "Visual and accessibility decisions")
     y = height - 92
     swatches = [
-        (Color(3 / 255, 7 / 255, 14 / 255), "Void #03070E", "Screen background"),
-        (Color(244 / 255, 247 / 255, 248 / 255), "Star #F4F7F8", "Body text"),
-        (Color(165 / 255, 116 / 255, 61 / 255), "Gold #A5743D", "Labels and the save button"),
-        (Color(155 / 255, 205 / 255, 221 / 255), "Dust #9BCDDD", "Secondary text"),
-        (Color(5 / 255, 69 / 255, 105 / 255), "Nebula #054569", "Secondary buttons"),
+        (Color(20 / 255, 12 / 255, 18 / 255), "Night #140C12", "Screen background"),
+        (Color(248 / 255, 243 / 255, 246 / 255), "Mist #F8F3F6", "Body text"),
+        (Color(255 / 255, 107 / 255, 87 / 255), "Coral #FF6B57", "Labels and the save button"),
+        (Color(212 / 255, 184 / 255, 200 / 255), "Blush #D4B8C8", "Secondary text"),
+        (Color(92 / 255, 46 / 255, 120 / 255), "Orchid #5C2E78", "Secondary buttons"),
     ]
     x = 36
     for color, name, use in swatches:
@@ -321,11 +341,11 @@ def build_uiux() -> None:
     decisions = [
         "Type: serif for the introduction and project titles, sans for controls. Body text is 15–16 pt with line height around 22 so enlarged system text wraps inside the scroll view.",
         "Spacing: 16 pt page padding, 10–16 pt gaps, and 48 pt minimum height on buttons and choice rows.",
-        "Contrast: off-white text on void #03070E, dust blue for secondary text, and void text on the gold button. Error text is light on a dark red field.",
-        "Labels: image actions include the slot name, for example Take a photo for Verification card. The external link exposes Needs a connection in its accessible name.",
+        "Contrast: mist text on night #140C12, blush for secondary text, and night text on the coral button. Error text is light on a dark red field.",
+        "Labels: image actions include the slot name, for example Take a photo for Verification card. Buttons name the action and the image slot.",
         "Large text: screens scroll. The name sentence is not limited to one line. Tab labels stay short: Home, Skills, Projects, Profile, About.",
         "Images: the default portrait can be replaced from the Profile tab. Remove clears the saved reference after Save.",
-        "Offline: no portfolio content is fetched from the network. Email, LinkedIn, and WhatsApp are marked Needs a connection.",
+        "Offline: no portfolio content is fetched from the network. The app does not include external contact links.",
     ]
     for item in decisions:
         y = paragraph(c, item, 36, y, width - 72, size=10, leading=13)
@@ -348,7 +368,7 @@ def build_uiux() -> None:
         ("Verification card", "The profile image and the handwritten-card photo are separate slots. Home shows the portrait. About shows the card preview the demonstration video asks for."),
         ("Five tabs", "About is its own tab rather than a button on Home, so the release facts and data-use statement stay one tap away."),
         ("Availability", "Three large choice rows replace a dropdown so the status is visible without an extra dialog and remains usable with large text."),
-        ("Artwork", "Project covers use the same void, gold, and off-white palette as the rest of the app."),
+        ("Artwork", "Project covers use the same night, coral, and mist palette as the rest of the app."),
     ]
     for title, body in changes:
         c.setFont("SansBold", 11)
@@ -363,28 +383,28 @@ def build_uiux() -> None:
 
 
 def build_test_log() -> None:
-    path = EVIDENCE / "MOB_A2_2527014_TEST_LOG.pdf"
+    path = EVIDENCE / "MOB_A2_2528013_TEST_LOG.pdf"
     c = canvas.Canvas(str(path), pagesize=A4)
     width, height = A4
     c.setFillColor(INK)
     c.rect(0, height - 36, width, 36, fill=1, stroke=0)
     c.setFillColor(white)
     c.setFont("SansBold", 10)
-    c.drawString(36, height - 23, "MOHHPortfolio test log  ·  MOB_A2_2527014")
+    c.drawString(36, height - 23, "MAAAPortfolio test log  ·  MOB_A2_2528013")
     y = height - 70
     c.setFillColor(INK)
     c.setFont("SerifBold", 16)
     c.drawString(36, y, "Test log")
     y -= 24
     facts = [
-        "Student: Mohammed Osama Hasan Hossein",
-        "Registration: 25/27014",
-        "Verification code: MOB-A2-7014",
-        "App: MOHHPortfolio 1.0.0",
-        "Package: rw.ac.ines.ug2527014.mohhportfolio",
+        "Student: Mahgoub Adil Ahmed Alhassn",
+        "Registration: 25/28013",
+        "Verification code: MOB-A2-8013",
+        "App: MAAAPortfolio 1.0.0",
+        "Package: rw.ac.ines.ug2528013.maaaportfolio",
         "Device model: ______________________________",
         "Android version: ___________________________",
-        "APK file: MOB_A2_2527014.apk",
+        "APK file: MOB_A2_2528013.apk",
         "Date tested: _______________________________",
     ]
     for line in facts:
@@ -397,8 +417,8 @@ def build_test_log() -> None:
     y -= 18
     checks = [
         "Installed APK opens without Expo Go",
-        "Home begins: My name is Mohammed Osama Hasan Hossein.",
-        "Verification code MOB-A2-7014 is visible on Home and About",
+        "Home begins: My name is Mahgoub Adil Ahmed Alhassn.",
+        "Verification code MOB-A2-8013 is visible on Home and About",
         "Skills show at least five items and an education timeline",
         "A project opens on its own detail screen and Back returns to the list",
         "A too-short headline blocks save and shows a field message",
@@ -406,7 +426,7 @@ def build_test_log() -> None:
         "Camera or gallery preview, replace, and remove work, including cancel and denial",
         "Verification-card photo previews on the Profile and About screens",
         "Portfolio still works in Airplane Mode, and the device clock is visible in the video",
-        "The INES link is labeled Needs a connection",
+        "About shows MAAAPortfolio, registration 25/28013, and code MOB-A2-8013",
     ]
     for index, check in enumerate(checks, start=1):
         c.setFont("Sans", 10)
@@ -441,14 +461,14 @@ def build_test_log() -> None:
 
 
 def build_declaration() -> None:
-    path = EVIDENCE / "MOB_A2_2527014_DECLARATION.pdf"
+    path = EVIDENCE / "MOB_A2_2528013_DECLARATION.pdf"
     c = canvas.Canvas(str(path), pagesize=A4)
     width, height = A4
     c.setFillColor(INK)
     c.rect(0, height - 36, width, 36, fill=1, stroke=0)
     c.setFillColor(white)
     c.setFont("SansBold", 10)
-    c.drawString(36, height - 23, "MOHHPortfolio declaration  ·  MOB_A2_2527014")
+    c.drawString(36, height - 23, "MAAAPortfolio declaration  ·  MOB_A2_2528013")
     y = height - 78
     c.setFillColor(INK)
     c.setFont("SerifBold", 16)
@@ -456,7 +476,7 @@ def build_declaration() -> None:
     y -= 28
     y = paragraph(
         c,
-        "I, Mohammed Osama Hasan Hossein, registration number 25/27014, submit MOHHPortfolio for SWE 3409 Individual Assignment 2. The verification code on the About screen and on my handwritten card is MOB-A2-7014.",
+        "I, Mahgoub Adil Ahmed Alhassn, registration number 25/28013, submit MAAAPortfolio for SWE 3409 Individual Assignment 2. The verification code on the About screen and on my handwritten card is MOB-A2-8013.",
         36,
         y,
         width - 72,
@@ -466,7 +486,7 @@ def build_declaration() -> None:
     y -= 8
     y = paragraph(
         c,
-        "I understand that the portfolio content must be my own. I will correct any project, skill, or biography text that does not describe my real backend work before I submit. I will not present another student's screens, wording, or visual design as mine.",
+        "I understand that the portfolio content must be my own. I will correct any project, skill, or biography text that does not describe my real automation, Python, and cloud work before I submit. I will not present another student's screens, wording, or visual design as mine.",
         36,
         y,
         width - 72,
@@ -493,7 +513,7 @@ def build_declaration() -> None:
     c.setFillColor(MUTED)
     paragraph(
         c,
-        "Sign this page by hand, then export or scan it as evidence/MOB_A2_2527014_DECLARATION.pdf if you replace this file with the signed copy.",
+        "Sign this page by hand, then export or scan it as evidence/MOB_A2_2528013_DECLARATION.pdf if you replace this file with the signed copy.",
         36,
         y,
         width - 72,

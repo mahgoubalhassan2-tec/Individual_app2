@@ -28,11 +28,11 @@ SANS_REG = first_existing(
     r"C:\Windows\Fonts\segoeui.ttf",
 )
 
-INK = (3, 7, 14, 255)
-PAPER = (3, 7, 14, 255)
-TERRACOTTA = (165, 116, 61, 255)
-CREAM = (244, 247, 248, 255)
-OLIVE = (155, 205, 221, 255)
+INK = (20, 12, 18, 255)
+PAPER = (20, 12, 18, 255)
+TERRACOTTA = (255, 107, 87, 255)
+CREAM = (248, 243, 246, 255)
+OLIVE = (212, 184, 200, 255)
 
 
 def font(path: str, size: int) -> ImageFont.FreeTypeFont:
@@ -59,7 +59,7 @@ def icon(size: int) -> Image.Image:
         outline=TERRACOTTA,
         width=max(4, size // 48),
     )
-    centered(draw, "MOHH", font(SERIF, int(size * 0.16)), (0, int(size * 0.28), size, int(size * 0.62)), CREAM)
+    centered(draw, "MAAA", font(SERIF, int(size * 0.16)), (0, int(size * 0.28), size, int(size * 0.62)), CREAM)
     centered(draw, "PORTFOLIO", font(SANS, int(size * 0.045)), (0, int(size * 0.62), size, int(size * 0.74)), TERRACOTTA)
     return image
 
@@ -67,7 +67,7 @@ def icon(size: int) -> Image.Image:
 def foreground(size: int = 1024) -> Image.Image:
     image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
-    centered(draw, "MOHH", font(SERIF, 180), (180, 340, 844, 620), CREAM)
+    centered(draw, "MAAA", font(SERIF, 180), (180, 340, 844, 620), CREAM)
     centered(draw, "PORTFOLIO", font(SANS, 42), (180, 600, 844, 700), TERRACOTTA)
     return image
 
@@ -75,7 +75,7 @@ def foreground(size: int = 1024) -> Image.Image:
 def monochrome(size: int = 1024) -> Image.Image:
     image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
-    centered(draw, "MOHH", font(SERIF, 180), (180, 380, 844, 680), (255, 255, 255, 255))
+    centered(draw, "MAAA", font(SERIF, 180), (180, 380, 844, 680), (255, 255, 255, 255))
     return image
 
 
@@ -83,19 +83,19 @@ def avatar() -> Image.Image:
     size = 900
     image = Image.new("RGBA", (size, size), INK)
     draw = ImageDraw.Draw(image)
-    centered(draw, "MOHH", font(SERIF, 148), (48, 250, size - 48, 520), CREAM)
-    centered(draw, "BACKEND", font(SANS, 36), (48, 500, size - 48, 640), TERRACOTTA)
+    centered(draw, "MAAA", font(SERIF, 148), (48, 250, size - 48, 520), CREAM)
+    centered(draw, "CLOUD", font(SANS, 36), (48, 500, size - 48, 640), TERRACOTTA)
     return image
 
 
 def monogram_piece() -> Image.Image:
-    image = Image.new("RGBA", (1200, 860), PAPER)
+    image = Image.new("RGBA", (1200, 860), INK)
     draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, 1200, 18), fill=TERRACOTTA)
-    draw.rectangle((48, 70, 1152, 790), outline=INK, width=3)
-    centered(draw, "MOHH", font(SERIF, 210), (80, 180, 1120, 520), INK)
-    centered(draw, "MOHAMMED OSAMA HASAN HOSSEIN", font(SANS, 28), (80, 540, 1120, 620), TERRACOTTA)
-    centered(draw, "A one-color monogram for print and screen", font(SANS_REG, 26), (80, 640, 1120, 720), OLIVE)
+    draw.rectangle((48, 70, 1152, 790), outline=TERRACOTTA, width=3)
+    centered(draw, "MAAA", font(SERIF, 210), (80, 180, 1120, 520), CREAM)
+    centered(draw, "MAHGOUB ADIL AHMED ALHASSN", font(SANS, 28), (80, 540, 1120, 620), TERRACOTTA)
+    centered(draw, "Automation, Python, and cloud engineering", font(SANS_REG, 26), (80, 640, 1120, 720), OLIVE)
     return image
 
 
@@ -103,13 +103,13 @@ def poster_piece() -> Image.Image:
     image = Image.new("RGBA", (1200, 860), INK)
     draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, 46, 860), fill=TERRACOTTA)
-    draw.text((90, 80), "RUHENGERI", font=font(SANS, 28), fill=(231, 179, 154, 255))
+    draw.text((90, 80), "CLOUD", font=font(SANS, 28), fill=TERRACOTTA)
     draw.text((90, 180), "Studio", font=font(SERIF, 120), fill=CREAM)
     draw.text((90, 320), "Poster", font=font(SERIF, 120), fill=CREAM)
     draw.rectangle((90, 500, 360, 512), fill=TERRACOTTA)
     body = "A type study that stays readable\nas a poster and as a square crop."
-    draw.multiline_text((90, 560), body, font=font(SANS_REG, 32), fill=PAPER, spacing=10)
-    draw.text((90, 760), "MOHH  ·  2026", font=font(SANS, 24), fill=(231, 179, 154, 255))
+    draw.multiline_text((90, 560), body, font=font(SANS_REG, 32), fill=CREAM, spacing=10)
+    draw.text((90, 760), "MAAA  ·  2026", font=font(SANS, 24), fill=TERRACOTTA)
     return image
 
 

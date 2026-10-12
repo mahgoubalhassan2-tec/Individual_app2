@@ -13,8 +13,8 @@ type Props = NativeStackScreenProps<ProjectsStackParamList, 'ProjectList'>;
 export function ProjectListScreen({ navigation }: Props) {
   return (
     <Screen>
-      <SectionHeading eyebrow="Services" title="Projects" />
-      <Text style={styles.lead}>Two backend services. Open one for the problem, the contribution, and the stack.</Text>
+      <SectionHeading eyebrow="Work" title="Projects" />
+      <Text style={styles.lead}>Two projects. Open one for the problem, the contribution, and the stack.</Text>
       {projects.length === 0 ? (
         <EmptyState title="No projects yet" detail="Add a project with a title, problem, contribution, and technology." />
       ) : (

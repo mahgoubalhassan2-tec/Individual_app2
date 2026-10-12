@@ -51,3 +51,7 @@ yarn-error.*
 # local tooling
 .venv/
 .pydeps/
+
+__pycache__/
+*.pyc
+node_modules/

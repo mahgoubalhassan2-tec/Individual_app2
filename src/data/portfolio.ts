@@ -22,64 +22,39 @@ export type Project = {
 
 export const skills: Skill[] = [
   {
+    id: 'python',
+    name: 'Python',
+    detail: 'Scripts that read input, automate a repeated task, and print a clear result.',
+  },
+  {
+    id: 'automation',
+    name: 'Automation',
+    detail: 'Turning a manual sequence into a script that can be run the same way again.',
+  },
+  {
+    id: 'cloud',
+    name: 'Cloud engineering',
+    detail: 'Preparing a service so it can run on a cloud platform instead of one local machine.',
+  },
+  {
     id: 'linux',
     name: 'Linux',
-    detail: 'The shell, files, permissions, and processes used to run and inspect a service.',
+    detail: 'The shell, files, and processes used to run automation and inspect a host.',
   },
   {
     id: 'git',
     name: 'Git',
-    detail: 'Commits, branches, and history so a service can be changed without losing the last working version.',
+    detail: 'Commits and history so a script or cloud setup can be changed without losing the last working version.',
   },
   {
-    id: 'python',
-    name: 'Python',
-    detail: 'Scripts and backend services, including reading data and returning a clear result.',
+    id: 'scripting',
+    name: 'Scripting',
+    detail: 'Small tools that collect input, do the work, and report what happened.',
   },
   {
-    id: 'javascript',
-    name: 'JavaScript',
-    detail: 'The language used to write Node.js servers, request handlers, and small tools.',
-  },
-  {
-    id: 'nodejs',
-    name: 'Node.js',
-    detail: 'HTTP servers that accept a request, run logic, and send a response.',
-  },
-  {
-    id: 'rest',
-    name: 'REST APIs',
-    detail: 'Resources, methods, and status codes so a client can use a service without seeing its internals.',
-  },
-  {
-    id: 'http',
-    name: 'HTTP',
-    detail: 'Requests, responses, headers, and status codes between a client and a server.',
-  },
-  {
-    id: 'sql',
-    name: 'SQL',
-    detail: 'Tables, queries, and relational data stored behind an API.',
-  },
-  {
-    id: 'json',
-    name: 'JSON',
-    detail: 'The request and response format used between a backend and its clients.',
-  },
-  {
-    id: 'auth',
-    name: 'Authentication',
-    detail: 'Checking who is calling a route before private data is returned.',
-  },
-  {
-    id: 'testing',
-    name: 'Testing',
-    detail: 'Checks that an endpoint still returns the right status and body after a change.',
-  },
-  {
-    id: 'logging',
-    name: 'Logging',
-    detail: 'A record of what the service did, so a failure can be traced from the terminal.',
+    id: 'infrastructure',
+    name: 'Infrastructure',
+    detail: 'The servers, configuration, and environment a cloud service needs before it can start.',
   },
 ];
 
@@ -88,35 +63,31 @@ export const education: EducationItem[] = [
     id: 'ines',
     period: 'September 2024 onward',
     title: 'INES-Ruhengeri',
-    detail: 'Software Engineering. Registration number 25/27014.',
+    detail: 'Software Engineering. Registration number 25/28013.',
   },
 ];
 
 export const projects: Project[] = [
   {
-    id: 'node-api',
-    title: 'Node.js request API',
-    year: '2026 · Backend',
+    id: 'python-automation',
+    title: 'Python automation scripts',
+    year: '2026 · Automation',
     problem:
-      'A client needed a small HTTP service that accepts JSON, rejects a bad request, and returns a stable response.',
+      'Repeated checks and file tasks were done by hand, so the same steps were easy to skip or mistype.',
     contribution:
-      'I wrote the Node.js routes, checked the incoming JSON, and returned status codes and error messages instead of failing silently.',
-    technology: 'JavaScript and Node.js',
+      'I wrote Python scripts that run those steps in order, read the input, and print a clear result when a step fails.',
+    technology: 'Python and automation',
   },
   {
-    id: 'python-linux',
-    title: 'Python tools on Linux',
-    year: '2026 · Backend',
+    id: 'cloud-setup',
+    title: 'Cloud environment setup',
+    year: '2026 · Cloud',
     problem:
-      'Repeated terminal work needed a repeatable Python tool, with the source kept in Git so a change could be reviewed.',
+      'A small service needed a repeatable place to run, instead of a machine set up once by hand.',
     contribution:
-      'I wrote the Python script on Linux, ran it from the shell, and committed the working version with Git.',
-    technology: 'Python, Linux, and Git',
+      'I prepared the cloud environment, checked that the service started, and kept the steps in Git so the setup can be repeated.',
+    technology: 'Cloud engineering and Git',
   },
 ];
 
-export const contactLinks = [
-  { label: 'Email moosamagadi@gmail.com', url: 'mailto:moosamagadi@gmail.com' },
-  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/mohammed-osama-72284420b/' },
-  { label: 'WhatsApp', url: 'https://wa.me/249124215192' },
-] as const;
+export const contactLinks: readonly { label: string; url: string }[] = [];

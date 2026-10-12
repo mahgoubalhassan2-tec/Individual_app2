@@ -42,7 +42,7 @@ export function AboutScreen() {
       </View>
       <Text style={styles.contactTitle}>Contact</Text>
       <Text style={styles.contactLead}>
-        Email, LinkedIn, and WhatsApp. These links need a connection. The profile, skills, and projects stay available offline.
+        No external contact links are included. The profile, skills, and projects stay available offline.
       </Text>
       {contactLinks.map((link) => (
         <Pressable

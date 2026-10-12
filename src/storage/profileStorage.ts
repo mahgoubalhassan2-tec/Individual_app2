@@ -6,7 +6,7 @@ import {
   Profile,
 } from '../validation/profileRules';
 
-const STORAGE_KEY = 'mohhportfolio.profile.v1';
+const STORAGE_KEY = 'maaaportfolio.profile.v1';
 
 function mediaFolder(): string | null {
   if (!FileSystem.documentDirectory) {

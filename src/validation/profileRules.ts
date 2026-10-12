@@ -1,5 +1,5 @@
 export const AVAILABILITY_OPTIONS = [
-  'Available for backend work',
+  'Available for automation work',
   'Open to internships',
   'Booked until exams',
 ] as const;
@@ -23,11 +23,11 @@ export type ProfileFieldErrors = {
 };
 
 export const defaultProfile: Profile = {
-  headline: 'Backend developer with Python and Node.js',
+  headline: 'Automation and cloud engineering with Python',
   biography:
-    'I study Software Engineering at INES-Ruhengeri. I build backend services with Python and Node.js, and I work on Linux with Git.',
-  primarySkill: 'Python',
-  availability: 'Available for backend work',
+    'I study Software Engineering at INES-Ruhengeri. I use Python to automate repeated work, and I set up services on the cloud.',
+  primarySkill: 'Cloud engineering',
+  availability: 'Available for automation work',
   portraitUri: null,
   verificationCardUri: null,
 };

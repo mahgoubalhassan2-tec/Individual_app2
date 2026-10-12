@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   resetConfirm: {
     minHeight: 48,
     borderRadius: 12,
-    backgroundColor: '#6E2424',
+    backgroundColor: colors.dangerStrong,
     alignItems: 'center',
     justifyContent: 'center',
   },

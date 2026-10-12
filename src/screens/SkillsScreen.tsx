@@ -12,7 +12,7 @@ export function SkillsScreen() {
     <Screen>
       <SectionHeading eyebrow="Stack" title="Skills" />
       <Text style={styles.lead}>
-        These are the backend skills behind the services in this portfolio.
+        These are the automation, Python, and cloud skills in this portfolio.
       </Text>
       {skills.length === 0 ? (
         <EmptyState title="No skills yet" detail="Add at least five skills in the portfolio data." />
